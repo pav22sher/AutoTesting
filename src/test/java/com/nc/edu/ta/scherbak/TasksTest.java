@@ -57,13 +57,9 @@ public class TasksTest
     public void testTimeline() {
         Task daily = task("Daily", YESTERDAY, TOMORROW, DAY, true);
         Task hourly = task("Hourly", TODAY, TOMORROW, HOUR, true);
-        Task every3h = task("Every 3 hours", 
-                new Date(TODAY.getTime() + HOUR*1000), 
-                TOMORROW, 
-                3*HOUR, true);
-        
+        Task every3h = task("Every 3 hours", TODAY_1H, TOMORROW,3*HOUR, true);
         List<Task> tasks = Arrays.asList(daily, hourly, every3h);
-        SortedMap<Date, Set<Task>> timeline = new TreeMap<Date, Set<Task>>();
+        SortedMap<Date, Set<Task>> timeline = new TreeMap<>();
         timeline.put(TODAY, set(daily, hourly));
         timeline.put(TODAY_1H, set(hourly, every3h));
         timeline.put(TODAY_2H, set(hourly));
