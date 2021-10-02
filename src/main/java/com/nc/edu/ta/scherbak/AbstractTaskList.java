@@ -26,13 +26,13 @@ public abstract class AbstractTaskList implements Serializable, Iterable<Task> {
         }
         @Override
         public Task next() {
-            try {
+            if (hasNext()) {
                 int i = cursor;
                 Task task = getTask(i);
                 lastRet = i;
                 cursor = i + 1;
                 return task;
-            } catch (IndexOutOfBoundsException e) {
+            } else {
                 throw new NoSuchElementException();
             }
         }
@@ -41,13 +41,14 @@ public abstract class AbstractTaskList implements Serializable, Iterable<Task> {
             if (lastRet < 0) {
                 throw new IllegalStateException();
             }
-            try {
+            if (hasNext()) {
                 Task task = getTask(lastRet);
                 AbstractTaskList.this.remove(task);
-                if (lastRet < cursor)
+                if (lastRet < cursor) {
                     cursor--;
+                }
                 lastRet = -1;
-            } catch (IndexOutOfBoundsException e) {
+            } else {
                 throw new NoSuchElementException();
             }
         }
