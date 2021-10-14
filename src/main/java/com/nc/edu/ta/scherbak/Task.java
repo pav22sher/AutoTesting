@@ -11,6 +11,7 @@ public class Task implements Serializable {
     private Date startTime;
     private Date endTime;
     private int repeatInterval;
+    public Task() {}
     public Task(String title, Date time) {
         this(title, time, time,0);
     }
@@ -74,6 +75,10 @@ public class Task implements Serializable {
         return repeatInterval;
     }
 
+    public void setRepeatInterval(int repeatInterval) {
+        this.repeatInterval = repeatInterval;
+    }
+
     public boolean isRepeated() {
         return repeatInterval != 0;
     }
@@ -88,10 +93,10 @@ public class Task implements Serializable {
         builder.append("Task ").append("\"").append(titlePrefix).append(title).append("\"");
         if (isActive()) {
             if (isRepeated()) {
-                builder.append(" from ").append(startTime).append(" to ").append(endTime);
+                builder.append(" from ").append(startTime.getTime()).append(" to ").append(endTime.getTime());
                 builder.append(" every ").append(repeatInterval).append(" seconds");
             } else {
-                builder.append(" at ").append(startTime);
+                builder.append(" at ").append(startTime.getTime());
             }
         } else {
             builder.append(" is inactive");

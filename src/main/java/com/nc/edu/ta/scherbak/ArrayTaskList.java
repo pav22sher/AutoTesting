@@ -50,7 +50,7 @@ public class ArrayTaskList extends TaskList{
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
-        builder.append("ArrayTaskList").append("(").append(size).append(")");
+        builder.append("ArrayTaskList").append("(").append(size).append(")\n");
         builder.append("[");
         for (int i = 0; i < size; i++) {
             Task task = tasks[i];
@@ -59,7 +59,7 @@ public class ArrayTaskList extends TaskList{
                 builder.append(task.getStringByTitle(TITLE_PREFIX + " ", task.getTitle()));
             }
         }
-        builder.append("]");
+        builder.append("\n]");
         return builder.toString();
     }
 
