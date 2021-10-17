@@ -4,16 +4,8 @@ import java.io.Serializable;
 import java.util.Objects;
 
 public class LinkedTaskList extends TaskList {
-    private static final String TITLE_PREFIX = "[LinkedTaskList]";
-    private static int count;
     private Node first;
-    public LinkedTaskList() {
-        count++;
-    }
-    public static int getCount() {
-        return count;
-    }
-
+    public LinkedTaskList() {}
     @Override
     public void add(Task task) {
         if(task != null) {
@@ -76,7 +68,7 @@ public class LinkedTaskList extends TaskList {
         while(tmp != null){
             Task tmpTask = tmp.task;
             builder.append("\n");
-            builder.append(tmpTask.getStringByTitle(TITLE_PREFIX + " ", tmpTask.getTitle()));
+            builder.append(tmpTask.getStringByTitle(" ", tmpTask.getTitle()));
             tmp = tmp.next;
         }
         builder.append("]");

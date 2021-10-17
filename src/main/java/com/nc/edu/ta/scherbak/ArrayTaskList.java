@@ -4,15 +4,9 @@ import java.util.Arrays;
 import java.util.Objects;
 
 public class ArrayTaskList extends TaskList{
-    private static final String TITLE_PREFIX = "[ArrayTaskList]";
-    private static int count;
     private Task[] tasks;
     public ArrayTaskList() {
         tasks = new Task[10];
-        count++;
-    }
-    public static int getCount() {
-        return count;
     }
     @Override
     public void add(Task task) {
@@ -56,7 +50,7 @@ public class ArrayTaskList extends TaskList{
             Task task = tasks[i];
             if(task != null) {
                 builder.append("\n");
-                builder.append(task.getStringByTitle(TITLE_PREFIX + " ", task.getTitle()));
+                builder.append(task.getStringByTitle(" ", task.getTitle()));
             }
         }
         builder.append("\n]");
