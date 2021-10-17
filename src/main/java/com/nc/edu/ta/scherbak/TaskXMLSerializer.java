@@ -7,14 +7,10 @@ import org.xml.sax.helpers.DefaultHandler;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 import javax.xml.stream.*;
-import javax.xml.transform.OutputKeys;
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.*;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.Date;
 
 public class TaskXMLSerializer {
@@ -29,10 +25,9 @@ public class TaskXMLSerializer {
             Transformer transformer = factory.newTransformer();
             transformer.setOutputProperty(OutputKeys.INDENT, "yes");//дополнительные пробелы при выводе дерева
             transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "yes");//опустить-xml-объявление
-            StreamSource source = new StreamSource(new StringReader(xml));
-            StringWriter target = new StringWriter();
-            transformer.transform(source, new StreamResult(target));
-            Files.writeString(Paths.get(file), target.toString());
+            Source source = new StreamSource(new StringReader(xml));
+            Result result = new StreamResult(new FileOutputStream(file));
+            transformer.transform(source, result);
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
