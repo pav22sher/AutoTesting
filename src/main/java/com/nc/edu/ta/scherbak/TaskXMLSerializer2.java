@@ -21,6 +21,8 @@ public class TaskXMLSerializer2 {
             DocumentBuilder builder = documentFactory.newDocumentBuilder();
             Document document = builder.newDocument();
             Element elements = document.createElement("tasks");
+            elements.setAttribute("xmlns:xsi", "http://www.w3.org/2001/XMLSchema-instance");
+            elements.setAttribute("xsi:noNamespaceSchemaLocation", XMLValidator.SCHEMA_FILE);
             for (Task task : list) {
                 boolean active = task.isActive();
                 Date time = task.getTime();

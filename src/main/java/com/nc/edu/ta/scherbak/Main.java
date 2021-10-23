@@ -20,10 +20,15 @@ class Main {
     }
 
     static void version1(ArrayTaskList arrayTaskList, LinkedTaskList linkedTaskList) {
-        TaskXMLSerializer.save(arrayTaskList, "arrayTaskList.xml");
-        System.out.println(TaskXMLSerializer.load("arrayTaskList.xml"));
-        TaskXMLSerializer.save(linkedTaskList, "linkedTaskList.xml");
-        System.out.println(TaskXMLSerializer.load("linkedTaskList.xml"));
+        String arrayXmlFile = "arrayTaskList.xml";
+        TaskXMLSerializer.save(arrayTaskList, arrayXmlFile);
+        System.out.println(arrayXmlFile + " validation = " + XMLValidator.validate(arrayXmlFile));
+        System.out.println(TaskXMLSerializer.load(arrayXmlFile));
+
+        String linkedXmlFile = "linkedTaskList.xml";
+        TaskXMLSerializer.save(linkedTaskList, linkedXmlFile);
+        System.out.println(TaskXMLSerializer.load(linkedXmlFile));
+        System.out.println(linkedXmlFile + " validation = " + XMLValidator.validate(linkedXmlFile));
     }
 
     static void version2(ArrayTaskList arrayTaskList, LinkedTaskList linkedTaskList) {

@@ -23,8 +23,8 @@ public class TaskXMLSerializer {
             xml = serializeToXml(list);
             TransformerFactory factory = TransformerFactory.newInstance();
             Transformer transformer = factory.newTransformer();
-            transformer.setOutputProperty(OutputKeys.INDENT, "yes");//дополнительные пробелы при выводе дерева
-            transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "yes");//опустить-xml-объявление
+            transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+            transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "yes");
             Source source = new StreamSource(new StringReader(xml));
             Result result = new StreamResult(new FileOutputStream(file));
             transformer.transform(source, result);
@@ -39,6 +39,8 @@ public class TaskXMLSerializer {
         XMLStreamWriter writer = factory.createXMLStreamWriter(stream);
         writer.writeStartDocument();
         writer.writeStartElement("tasks");
+        writer.writeAttribute("xmlns:xsi", "http://www.w3.org/2001/XMLSchema-instance");
+        writer.writeAttribute("xsi:noNamespaceSchemaLocation", XMLValidator.SCHEMA_FILE);
         for (Task task : list) {
             boolean active = task.isActive();
             Date time = task.getTime();
